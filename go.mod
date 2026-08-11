@@ -1,4 +1,4 @@
-module github.com/lyft/protoc-gen-star/v2
+module github.com/timmonfette1/protoc-gen-star/v2
 
 go 1.23
 
