@@ -1,8 +1,8 @@
 package main
 
 import (
-	pgs "github.com/lyft/protoc-gen-star/v2"
-	pgsgo "github.com/lyft/protoc-gen-star/v2/lang/go"
+	pgs "github.com/timmonfette1/protoc-gen-star/v2"
+	pgsgo "github.com/timmonfette1/protoc-gen-star/v2/lang/go"
 )
 
 func main() {

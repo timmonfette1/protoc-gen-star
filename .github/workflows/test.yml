@@ -13,13 +13,13 @@ jobs:
       GOBIN: ${{ github.workspace }}/bin
     defaults:
       run:
-        working-directory: ${{ env.GOPATH }}/src/github.com/lyft/protoc-gen-star
+        working-directory: ${{ env.GOPATH }}/src/github.com/timmonfette1/protoc-gen-star
     name: protoc version 3.17.0
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-          path: ${{ env.GOPATH }}/src/github.com/lyft/protoc-gen-star
+          path: ${{ env.GOPATH }}/src/github.com/timmonfette1/protoc-gen-star
       - name: Set Up Go
         uses: actions/setup-go@v2
         with:
@@ -33,4 +33,3 @@ jobs:
         run: make testdata
       - name: Run Tests
         run: make tests
-
