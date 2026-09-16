@@ -1,0 +1,4 @@
+[tools]
+make = "latest"
+protoc = "latest"
+go = "1.26.4"

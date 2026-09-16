@@ -364,3 +364,18 @@ func dummyFile() *file {
 
 	return f
 }
+
+func dummyEditionsFile() *file {
+	pkg := dummyPkg()
+	f := &file{
+		pkg: pkg,
+		desc: &descriptor.FileDescriptorProto{
+			Package: proto.String(pkg.ProtoName().String()),
+			Syntax:  proto.String(string(Editions)),
+			Name:    proto.String("file.proto"),
+		},
+	}
+	pkg.addFile(f)
+
+	return f
+}
