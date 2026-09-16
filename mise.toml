@@ -2,3 +2,11 @@
 make = "latest"
 protoc = "latest"
 go = "1.26.4"
+
+[tasks.build]
+description = "Build the Go source code"
+run = [
+    "go fmt ./...",
+    "go build ./...",
+    "go vet -composites=false ./...",
+]
