@@ -91,6 +91,9 @@ func (f *field) HasPresence() bool {
 		if f.Syntax() == Proto2 {
 			return true
 		}
+		if f.Syntax() == Editions {
+			return f.HasFieldPresenceFeature()
+		}
 		return f.HasOptionalKeyword()
 	}
 	return false
@@ -101,6 +104,17 @@ func (f *field) HasOptionalKeyword() bool {
 		return f.desc.GetProto3Optional()
 	}
 	return f.desc.GetLabel() == descriptor.FieldDescriptorProto_LABEL_OPTIONAL
+}
+
+func (f *field) HasFieldPresenceFeature() bool {
+	if f.desc.GetOptions() != nil {
+		if f.desc.GetOptions().GetFeatures() != nil {
+			return f.desc.GetOptions().GetFeatures().GetFieldPresence() == descriptor.FeatureSet_EXPLICIT
+		}
+	}
+
+	// By default, Editions are all EXPLICIT presence.
+	return true
 }
 
 func (f *field) Required() bool {

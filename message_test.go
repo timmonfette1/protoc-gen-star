@@ -499,3 +499,14 @@ func dummyMsg() *msg {
 	f.addMessage(m)
 	return m
 }
+
+func dummyEditionsMsg() *msg {
+	f := dummyEditionsFile()
+
+	m := &msg{
+		desc: &descriptor.DescriptorProto{Name: proto.String("message")},
+	}
+
+	f.addMessage(m)
+	return m
+}

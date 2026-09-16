@@ -130,6 +130,25 @@ func TestField_HasPresence(t *testing.T) {
 	assert.True(t, f.HasPresence())
 }
 
+func TestField_Editions_HasPresence(t *testing.T) {
+	t.Parallel()
+
+	f := dummyEditionsField()
+	f.addType(&repT{scalarT: &scalarT{}})
+	assert.False(t, f.HasPresence())
+
+	f.addType(&mapT{repT: &repT{scalarT: &scalarT{}}})
+	assert.False(t, f.HasPresence())
+
+	f.addType(&scalarT{})
+	assert.True(t, f.HasPresence())
+
+	features := descriptor.FeatureSet{FieldPresence: descriptor.FeatureSet_IMPLICIT.Enum()}
+	opts := descriptor.FieldOptions{Features: &features}
+	f.desc = &descriptor.FieldDescriptorProto{Options: &opts}
+	assert.False(t, f.HasPresence())
+}
+
 func TestField_HasOptionalKeyword(t *testing.T) {
 	t.Parallel()
 
@@ -239,6 +258,16 @@ func (f *mockField) accept(v Visitor) error {
 
 func dummyField() *field {
 	m := dummyMsg()
+	str := descriptor.FieldDescriptorProto_TYPE_STRING
+	f := &field{desc: &descriptor.FieldDescriptorProto{Name: proto.String("field"), Type: &str}}
+	m.addField(f)
+	t := &scalarT{}
+	f.addType(t)
+	return f
+}
+
+func dummyEditionsField() *field {
+	m := dummyEditionsMsg()
 	str := descriptor.FieldDescriptorProto_TYPE_STRING
 	f := &field{desc: &descriptor.FieldDescriptorProto{Name: proto.String("field"), Type: &str}}
 	m.addField(f)

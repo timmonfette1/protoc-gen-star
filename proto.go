@@ -18,6 +18,12 @@ const (
 	// Most of the field types in the generated go structs are value types.
 	// See: https://github.com/protocolbuffers/protobuf/blob/v3.17.0/docs/field_presence.md#presence-in-proto3-apis
 	Proto3 Syntax = "proto3"
+
+	// Editions syntax enables the use of Features with default values to control behavior such as field presence.
+	// Most of the field types in generated go structs are pointers.
+	// See: https://protobuf.dev/programming-guides/editions
+	// See: https://protobuf.dev/editions/overview/
+	Editions Syntax = "editions"
 )
 
 // SupportsRequiredPrefix returns true if s supports "optional" and
